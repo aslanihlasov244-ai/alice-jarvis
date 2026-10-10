@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
 
-export async function POST(request: Request) {
+export async function POST(request) {
   try {
     const body = await request.json();
     const userMessage = body.request?.command?.trim() || body.request?.original_utterance?.trim();
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     });
 
     const chat = model.startChat({
-      history: history.map((msg: any) => ({
+      history: history.map((msg) => ({
         role: msg.role === "model" ? "model" : "user",
         parts: [{ text: msg.text }],
       })),
